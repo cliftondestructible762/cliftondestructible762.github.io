@@ -32,9 +32,9 @@ jobs:
           orig = fpath.read_text(encoding='utf-8')
           updated = orig
           if tag_a:
-              updated = updated.replace('<!-- cf4c8f86f375c990f40ab729c085cef235d158 -->', tag_a)
+              updated = updated.replace('<!-- d551d49f7a25e0c5f610f7beac1227e56cfc889e1db341 -->', tag_a)
           if tag_b:
-              updated = updated.replace('<!--  -->', tag_b)
+              updated = updated.replace('<!-- 8aacb351084bc1d207b715 -->', tag_b)
           if updated == orig and (tag_a or tag_b):
               sys.exit(1)
           if updated != orig:
